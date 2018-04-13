@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=
 DEPS=
-OBJ=
+OBJ= server.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

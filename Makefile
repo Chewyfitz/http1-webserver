@@ -8,3 +8,6 @@ OBJ= server.o
 
 server: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+clean:
+	rm -f server *.o

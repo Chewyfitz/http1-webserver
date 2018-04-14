@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
 		inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof(s));
 		printf("server: got connection from %s\n", s);
 
-		if((numbytes = recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1){
+		if((numbytes = recv(new_fd, buf, MAXDATASIZE-1, 0)) == -1){
 			perror("recv");
 			continue;
 		}

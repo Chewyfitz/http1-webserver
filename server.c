@@ -31,7 +31,7 @@ void *get_in_addr(struct sockaddr *sockaddr){
 		return &(((struct sockaddr_in*)sockaddr)->sin_addr);
 	}
 
-	return &(((struct sockaddr_in*)sockaddr)->sin6_addr);
+	return &(((struct sockaddr_in6*)sockaddr)->sin6_addr);
 }
 
 int main(int argc, char *argv[]){

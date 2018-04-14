@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char* port = argv[1];
+	char* port = htons(atoi(argv[1]));
 	char* root = argv[2];
 
 	memset(&hints, 0, sizeof(hints));
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
 	hints.ai_flags = AI_PASSIVE;
 
 	// loads up the nitty gritty of *servinfo
-	if((rv = getaddrinfo(NULL, htons(atoi(port)), &hints, &servinfo)) != 0){
+	if((rv = getaddrinfo(NULL, port, &hints, &servinfo)) != 0){
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
@@ -102,8 +102,6 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("server: waiting for connections...\n");
-
-	printf("%d\na",sockfd);
 	/*
 	while(1){ // Time to accept() some requests
 		addr_len = sizeof(their_addr);

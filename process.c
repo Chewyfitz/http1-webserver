@@ -27,14 +27,14 @@ void processRequest(char *request, int socket){
 	int request_size = strlen(request);
 	char[request_size] s;
 	strcpy(s, request); // copy it to local so nothing can mess with it.
-	char** request = malloc(MAXDATASIZE*sizeof(char*));
+	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
-	char separators[] = " \n"
+	char separators[] = " \n";
 
 	int i = 0;
-	request[0] = (token = strtok(s, separators));
+	req[0] = (token = strtok(s, separators));
 	while(token != NULL){
-		request[++i] = (token = strtok(NULL, separators));
+		req[++i] = (token = strtok(NULL, separators));
 	}
 	
 }

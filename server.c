@@ -10,12 +10,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
-#include <netinet/in.h>
+#include <sys/wait.h>
+#include <signal.h>
+
 
 #define QUEUE 10	// How many connections can be queued 
 					// (How many simultaneous incoming connections)
@@ -26,9 +31,10 @@ int main(int argc, char *argv[]){
 	struct addrinfo hints, *servinfo, *p;
 	struct sockaddr_storage their_addr;	// address information for new connections.
 	socklen_t addr_len;
-	struct sigation sigation;
+	struct sigaction sa;
 	int yes = 1;
 	char s[ADDRSTRLEN];
+	int rv;
 
 	if(argc < 3){
 		fprintf(stderr, "not enough arguments\nusage: server port path_to_root\n");
@@ -44,7 +50,7 @@ int main(int argc, char *argv[]){
 	hints.ai_flags = AI_PASSIVE;
 
 	// loads up the nitty gritty of *servinfo
-	if((rv = getaddrinfo(NULL, port, &hints, &servinfo)) != 0){
+	if((rv = getaddrinfo(NULL, &port, &hints, &servinfo)) != 0){
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
@@ -78,7 +84,7 @@ int main(int argc, char *argv[]){
 		exit(1);
 	}
 
-	freaddrinfo(servinfo); // don't need this anymore.
+	freeaddrinfo(servinfo); // don't need this anymore.
 
 	if(listen(sockfd, QUEUE) == -1){
 		// listen errored
@@ -89,6 +95,6 @@ int main(int argc, char *argv[]){
 	printf("server: waiting for connections...\n");
 
 
-	printf("lolnope jk\n")
+	printf("lolnope jk\n");
 	return 0;
 }

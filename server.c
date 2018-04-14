@@ -7,6 +7,16 @@
 #include <netinet/in.h>
 
 int main(int argc, char *argv[]){
+	struct addrinfo hints, *res, *p;
+	int status;
+	char ipstr[INET_ADDRSTRLEN];
+
+	if(argc != 3){
+		fprintf(stderr, "usage: server port path_to_root");
+		return 1;
+	}
+
+	
 	printf("Dev Branch\n");
 	return 0;
 }

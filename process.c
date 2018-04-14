@@ -25,7 +25,7 @@
 
 void processRequest(char *request, int socket){
 	int request_size = strlen(request);
-	char[request_size] s;
+	char* s = malloc(request_size * sizeof(char));
 	strcpy(s, request); // copy it to local so nothing can mess with it.
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;

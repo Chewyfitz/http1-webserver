@@ -102,7 +102,7 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("server: waiting for connections...\n");
-	/*
+	
 	while(1){ // Time to accept() some requests
 		addr_len = sizeof(their_addr);
 		new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &addr_len);
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]){
 		printf("server: got connection from %s\n", s);
 
 	}
-	*/
+	
 
 	printf("lolnope jk\n");
 	return 0;

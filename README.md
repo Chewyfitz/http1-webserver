@@ -2,11 +2,12 @@ Hopefully everything should work!
 
 Implemented:
 
++ Makefile
++ Socket Connections
+
 --------------
 Not Yet Implemented:
 
-- Makefile
-- Socket Connections
 - Header Reading
 - File IO
 - html MIME type

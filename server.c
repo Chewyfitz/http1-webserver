@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 	socklen_t addr_len;
 	struct sigaction sa;
 	int yes = 1;
-	char s[ADDRSTRLEN];
+	char s[INET_ADDRSTRLEN];
 	int rv;
 
 	if(argc < 3){
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
 	int port = atoi(argv[1]);
 	char* root = argv[2];
 
-	memset(hints, 0, sizeof(hints));
+	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;

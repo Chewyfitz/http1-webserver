@@ -103,7 +103,7 @@ int main(int argc, char *argv[]){
 
 	printf("server: waiting for connections...\n");
 
-	printf(sockfd);
+	printf(*sockfd);
 	/*
 	while(1){ // Time to accept() some requests
 		addr_len = sizeof(their_addr);

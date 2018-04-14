@@ -25,6 +25,15 @@
 #define QUEUE 10	// How many connections can be queued 
 					// (How many simultaneous incoming connections)
 
+// Macro for getting the address of the client
+void *get_in_addr(struct sockaddr *sockaddr){
+	if(sockaddr->sa_family == AF_INET){
+		return &(((struct sockaddr_in*)sockaddr)->sin_addr);
+	}
+
+	return &(((struct sockaddr_in*)sockaddr)->sin6_addr)
+}
+
 int main(int argc, char *argv[]){
 
 	int sockfd, new_fd;	// sockfd is our listening socket, new_fd for new connections.
@@ -104,7 +113,7 @@ int main(int argc, char *argv[]){
 
 		inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof(s));
 		printf("server: got connection from %s\n", s);
-		
+
 	}
 
 

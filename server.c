@@ -25,6 +25,8 @@
 #define QUEUE 10	// How many connections can be queued 
 					// (How many simultaneous incoming connections)
 
+#define MAXDATASIZE 100 // the maximum size we can get at once
+
 // Macro for getting the address of the client
 void *get_in_addr(struct sockaddr *sockaddr){
 	if(sockaddr->sa_family == AF_INET){
@@ -36,6 +38,7 @@ void *get_in_addr(struct sockaddr *sockaddr){
 
 int main(int argc, char *argv[]){
 
+	//socket stuff
 	int sockfd, new_fd;	// sockfd is our listening socket, new_fd for new connections.
 	struct addrinfo hints, *servinfo, *p;
 	struct sockaddr_storage their_addr;	// address information for new connections.
@@ -45,6 +48,15 @@ int main(int argc, char *argv[]){
 	char s[INET_ADDRSTRLEN];
 	int rv;
 
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_PASSIVE;
+
+	//client stuff
+	char buf[MAXDATASIZE];
+	int numbytes; // for recieved data
+
 	if(argc < 3){
 		fprintf(stderr, "not enough arguments\nusage: server port path_to_root\n");
 		return 1;
@@ -52,11 +64,6 @@ int main(int argc, char *argv[]){
 
 	char* port = argv[1];
 	char* root = argv[2];
-
-	memset(&hints, 0, sizeof(hints));
-	hints.ai_family = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_PASSIVE;
 
 	// loads up the nitty gritty of *servinfo
 	if((rv = getaddrinfo(NULL, port, &hints, &servinfo)) != 0){
@@ -114,6 +121,15 @@ int main(int argc, char *argv[]){
 		inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof(s));
 		printf("server: got connection from %s\n", s);
 
+		if((numbytes = recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1){
+			perror("recv");
+			continue;
+		}
+		buf[numbytes] = '\0';
+
+		printf("data recieved: %s\n", buf);
+
+		close(new_fd);
 	}
 	
 

@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char* port = htons(atoi(argv[1]));
+	char* port = argv[1];
 	char* root = argv[2];
 
 	memset(&hints, 0, sizeof(hints));

@@ -8,6 +8,8 @@
 */
 
 
+#ifndef HEAD_INCLUDE
+//Libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -22,10 +24,17 @@
 #include <signal.h>
 
 
+//Custom Files
+#include "process.h"
+
 #define QUEUE 10	// How many connections can be queued 
 					// (How many simultaneous incoming connections)
 
 #define MAXDATASIZE 256 // the maximum size we can get at once
+
+#define HEAD_INCLUDE 1
+#endif
+
 
 // Macro for getting the address of the client
 void *get_in_addr(struct sockaddr *sockaddr){
@@ -128,6 +137,8 @@ int main(int argc, char *argv[]){
 		buf[numbytes] = '\0';
 
 		printf("data recieved: %s\n", buf);
+
+		// processRequest(buf, new_fd); // Pass it off for response.
 
 		close(new_fd);
 	}

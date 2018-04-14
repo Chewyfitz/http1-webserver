@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=
-DEPS=
-OBJ= server.o
+DEPS= process.h
+OBJ= server.o process.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

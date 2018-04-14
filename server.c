@@ -25,7 +25,7 @@
 #define QUEUE 10	// How many connections can be queued 
 					// (How many simultaneous incoming connections)
 
-#define MAXDATASIZE 100 // the maximum size we can get at once
+#define MAXDATASIZE 50 // the maximum size we can get at once
 
 // Macro for getting the address of the client
 void *get_in_addr(struct sockaddr *sockaddr){

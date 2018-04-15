@@ -52,7 +52,7 @@ void sendNotFound(int sock){
 
 }
 
-sendchar(FILE file, int sock){
+void sendchar(FILE file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
@@ -71,7 +71,7 @@ sendchar(FILE file, int sock){
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 
-sendchar(FILE file, int sock){
+void sendbinary(FILE file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));

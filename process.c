@@ -31,7 +31,8 @@ void getExt(char* extension, char* filename){
 	// This funciton will store the appropriate extension (after the .)
 	// in char* extension. (or '/' if the root was requested).
 	////printf("1: %s\n", filename);
-	int len= strlen(filename) -1;
+	int len = 0;
+	len = strlen(filename) -1;
 	int i = 0;
 	while((filename[len - (i)] != '.') && len - i > 0){
 		////printf("2: %c\n", filename[len - (i)]);
@@ -106,8 +107,8 @@ void processRequest(char *request, int socket, char* pre_path){
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
 	char separators[] = " \n";
-	char path[MAXDATASIZE];
-	char ext[6];
+	char path[MAXDATASIZE] = "\0";
+	char ext[6] = "\0";
 	strcpy(path, pre_path);
 
 	FILE *file = NULL;

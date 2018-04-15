@@ -15,6 +15,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#include <assert.h>
+
 //Custom Files
 
 #define QUEUE 10	// How many connections can be queued 
@@ -55,6 +57,7 @@ void sendNotFound(int sock){
 }
 
 void sendchar(FILE* file, int sock){
+	assert(file != NULL);
 	//initialise this to a size
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));

@@ -32,11 +32,16 @@
 
 #define MAXDATASIZE 256 // the maximum size we can get at once
 
+// This variable is changed when the program is started to be the address
+// which is passeddd in as the second argument. Otherwise it is only prepended
+// to paths to files.
+char pre_path[100] = ".";
+
 #define HEAD_INCLUDE 1
 #endif
 
 
-// Macro for getting the address of the client
+// Macro for getting the address of the client (useful if support for ipv6 is added later)
 void *get_in_addr(struct sockaddr *sockaddr){
 	if(sockaddr->sa_family == AF_INET){
 		return &(((struct sockaddr_in*)sockaddr)->sin_addr);
@@ -72,7 +77,7 @@ int main(int argc, char *argv[]){
 	}
 
 	char* port = argv[1];
-	char* root = argv[2];
+	strcpy(pre_path, argv[2]); //copy the path_to_root into the pre_path global variable.
 
 	// loads up the nitty gritty of *servinfo
 	if((rv = getaddrinfo(NULL, port, &hints, &servinfo)) != 0){

@@ -20,10 +20,12 @@
 
 #define MAXDATASIZE 256 // the maximum size we can get at once
 
+char pre_path[100] = ".";
+
 #define HEAD_INCLUDE 1
 #endif
 
-void processRequest(char *request, int socket){
+void processRequest(char *request, int socket, ){
 	int request_size = strlen(request);
 	char* s = malloc(request_size * sizeof(char));
 	strcpy(s, request); // copy it to local so nothing can mess with it.
@@ -36,5 +38,12 @@ void processRequest(char *request, int socket){
 	while(token != NULL){
 		req[++i] = (token = strtok(NULL, separators));
 	}
+
+	// Check if it's a GET request. (Only need to handle GET requests :^) )
+	if(!(strcmp(req[0], "GET") == 0)){
+		return;
+	}
+
+	//Process the next part of the request: path/to/file.
 	
 }

@@ -66,7 +66,6 @@ void sendchar(FILE* file, int sock){
 	char http_message[] = "HTTP/1.0 200 OK\r\n";
 
 	int i = 0;
-	printf("%d", i);
 	char just_read = '1';
 	while(just_read != EOF){
 		if(i >= send_buff_size){
@@ -84,12 +83,13 @@ void sendchar(FILE* file, int sock){
 	strcat(concat_message, http_message);
 	strcat(concat_message, send_buff);
 	printf("\n");
-	printf("Sending %s", send_buff);
+	printf("Sending %s", concat_message);
 
 
-	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+	send(sock, concat_message, (size_t)strlen(concat_message)+1, 0);
 
 	free(send_buff);
+	free(concat_message);
 }
 
 void sendbinary(FILE* file, int sock){

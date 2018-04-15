@@ -81,6 +81,8 @@ void sendchar(FILE* file, int sock){
 	printf("\n");
 	printf("Sending %s", send_buff);
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+	
+	free(send_buff);
 }
 
 void sendbinary(FILE* file, int sock){

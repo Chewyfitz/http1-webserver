@@ -1,1 +1,1 @@
-void processRequest(char *request, int socket);
+void processRequest(char *request, int socket, char* pre_path);

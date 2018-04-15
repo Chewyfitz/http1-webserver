@@ -20,12 +20,10 @@
 
 #define MAXDATASIZE 256 // the maximum size we can get at once
 
-char pre_path[100] = ".";
-
 #define HEAD_INCLUDE 1
 #endif
 
-void processRequest(char *request, int socket){
+void processRequest(char *request, int socket, char* pre_path){
 	int request_size = strlen(request);
 	char* s = malloc(request_size * sizeof(char));
 	strcpy(s, request); // copy it to local so nothing can mess with it.

@@ -143,7 +143,7 @@ int main(int argc, char *argv[]){
 
 		printf("data recieved: %s\n", buf);
 
-		// processRequest(buf, new_fd); // Pass it off for response.
+		processRequest(buf, new_fd, pre_path); // Pass it off for response.
 
 		close(new_fd);
 	}

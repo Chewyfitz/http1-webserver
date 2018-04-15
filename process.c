@@ -93,7 +93,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	}
 
 	if(file == NULL){
-		send_buff = "HTTP/1.0 404 Not Found\r\n"
+		send_buff = "HTTP/1.0 404 Not Found\r\n";
 		sendto(socket, send_buff, (size_t)strlen(send_buff), 0);
 	}
 

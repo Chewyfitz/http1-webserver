@@ -58,7 +58,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	//add the path of the requested file on to the webroot directory
 	strcat(path, req[1]);
 
-	getExt(ext, req[1]); 	// custom function to get a pointer to just the
+	getExt(ext, path); 	// custom function to get a pointer to just the
 							// extension (so I know how to open the file)
 
 	if(strcmp(ext, ".jpg") == 0){

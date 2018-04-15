@@ -36,6 +36,12 @@ void getExt(char* extension, char* filename){
 
 	strcpy(extension, filename + (len - i));
 	printf("3: %s\n", extension);
+
+	if(strcmp(extension, filename) == 0){
+		extension[0] = '/';
+		extension[1] = '\0';
+	}
+	printf("4: %s\n", extension);
 }
 
 void processRequest(char *request, int socket, char* pre_path){
@@ -46,7 +52,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	char* token;
 	char separators[] = " \n";
 	char path[100];
-	char ext[5];
+	char ext[6];
 	strcpy(path, pre_path);
 
 	int i = 0;

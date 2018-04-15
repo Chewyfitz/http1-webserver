@@ -62,9 +62,10 @@ void sendchar(FILE* file, int sock){
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
+
+	char http_message[] = "HTTP/1.0 200 OK\r\n";
+
 	int i = 0;
-	send_buff = "HTTP/1.0 200 OK\r\n";
-	i = strlen(send_buff);
 	printf("%d", i);/*
 	char just_read = '1';
 	while(just_read != EOF){
@@ -78,7 +79,9 @@ void sendchar(FILE* file, int sock){
 		just_read = (send_buff[i++] = fgetc(file));
 		printf("%c", just_read);
 	}*/
-	strcat(send_buff, "<html><head></head><body>Hello</body></html>");
+	send_buff[0] = '\0';
+	strcat(http_message, "<html><head></head><body>Hello</body></html>");
+	strcat(send_buff, http_message);
 	printf("\n");
 	printf("Sending %s", send_buff);
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);

@@ -23,6 +23,14 @@
 #define HEAD_INCLUDE 1
 #endif
 
+void getExt(char* extension, char* filename){
+	int i = strlen(filename);
+	while(*(filename + i--) != ".");
+	strcpy(extension, filename + i);
+
+	printf(extension);
+}
+
 void processRequest(char *request, int socket, char* pre_path){
 	int request_size = strlen(request);
 	char* s = malloc(request_size * sizeof(char));
@@ -30,6 +38,9 @@ void processRequest(char *request, int socket, char* pre_path){
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
 	char separators[] = " \n";
+	char[100] path;
+	char[5] ext;
+	strcpy(path, pre_path);
 
 	int i = 0;
 	req[0] = (token = strtok(s, separators));
@@ -42,6 +53,16 @@ void processRequest(char *request, int socket, char* pre_path){
 		return;
 	}
 
-	//Process the next part of the request: path/to/file.
-	
+	//add the path of the requested file on to the webroot directory
+	strcat(path, req[1]);
+
+	getExt(ext, req[1]) 	// custom function to get a pointer to just the
+							// extension (so I know how to open the file)
+
+	if(strcmp(ext, ".jpg") == 0){
+		// Open the file as binary.
+	} else {
+		// Open the file as text.
+	}
+
 }

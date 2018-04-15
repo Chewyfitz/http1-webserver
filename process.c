@@ -113,7 +113,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	//add the path of the requested file on to the webroot directory
 	strcat(path, req[1]);
 	if(path[0] == '/'){
-		strcpy(path, path + 1);
+		path++;
 	}
 
 	getExt(ext, path); 	// custom function to get a str pointer to just the

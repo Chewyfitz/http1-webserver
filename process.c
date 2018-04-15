@@ -24,11 +24,12 @@
 #endif
 
 void getExt(char* extension, char* filename){
+	printf("1: %s\n", filename);
 	int i = strlen(filename);
-	while(*(&filename + i--) != ".") printf("%s\n", *(&filename + i));
+	while(*(&filename + i--) != ".") printf("2: %s\n", *(&filename + i));
 
 	strcpy(extension, filename + i);
-	printf("%s\n", extension);
+	printf("3: %s\n", extension);
 }
 
 void processRequest(char *request, int socket, char* pre_path){

@@ -52,12 +52,12 @@ void sendNotFound(int sock){
 
 }
 
-void sendchar(FILE file, int sock){
+void sendchar(FILE* file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
-	i = 0;
+	int i = 0;
 	send_buff = "HTTP/1.0 200 OK\r\n";
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 
@@ -71,12 +71,12 @@ void sendchar(FILE file, int sock){
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 
-void sendbinary(FILE file, int sock){
+void sendbinary(FILE* file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
-	i = 0;
+	int i = 0;
 	send_buff = "HTTP/1.0 200 OK\r\n";
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 
@@ -136,7 +136,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendchar(file, sock)
+		sendchar(file, sock);
 	} else if(strcmp(ext, ".jpg") == 0){
 		// Open the file as binary. (.jpg)
 		file = fopen(path, "rb");
@@ -147,7 +147,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendbinary(file, sock)
+		sendbinary(file, sock);
 	} else {
 		// Open the file as text. (.html .css .js)
 		file = fopen(path, "r");
@@ -158,6 +158,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendchar(file, sock)
+		sendchar(file, sock);
 	}
+	fclose(file);
 }

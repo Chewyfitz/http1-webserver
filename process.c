@@ -113,7 +113,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	//add the path of the requested file on to the webroot directory
 	strcat(path, req[1]);
 	if(path[0] == '/'){
-		char* temppath = malloc(sizeof(path)*char);
+		char* temppath = malloc(strlen(path)*sizeof(char));
 		strcpy(temppath, path+1);
 		strcpy(path+1, temppath);
 		free(temppath);

@@ -172,5 +172,7 @@ void processRequest(char *request, int socket, char* pre_path){
 
 		sendchar(file, sock);
 	}
+	free(s);
+	free(req);
 	fclose(file);
 }

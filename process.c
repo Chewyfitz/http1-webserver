@@ -34,7 +34,6 @@ void getExt(char* extension, char* filename){
 		i++;
 	}
 
-	// +1 for offset
 	strcpy(extension, filename + (len - i + 2));
 	printf("3: %s\n", extension);
 }

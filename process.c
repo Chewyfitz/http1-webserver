@@ -72,7 +72,7 @@ void sendchar(FILE* file, int sock){
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
 
-	char http_message[] = "HTTP/1.0 200 OK\r\n";
+	char http_message[] = "HTTP/1.0 200 OK\r\n\r\n";
 
 	int i = 0;
 	int just_read;

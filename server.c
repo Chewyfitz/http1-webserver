@@ -1,3 +1,5 @@
+// Aidan Fitzpatrick (fitzpatricka)
+
 /*
 *	sever.c -- a simple HTTP/1.0 server.
 *	Hopefully should be easy to adapt to newer versions of HTTP and expand to

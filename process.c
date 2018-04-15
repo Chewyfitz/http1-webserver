@@ -1,3 +1,5 @@
+// Aidan Fitzpatrick (fitzpatricka)
+
 #ifndef HEAD_INCLUDE
 //Libraries
 #include <stdio.h>
@@ -55,6 +57,7 @@ void sendNotFound(int sock){
 void sendchar(FILE* file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
+	char* in_buff = malloc(send_buff_size*sizeof(char));
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
 	int i = 0;
@@ -63,17 +66,20 @@ void sendchar(FILE* file, int sock){
 
 	while(!EOF){
 		if(i >= MAXDATASIZE){
+			send_buff = htons(in_buff);
 			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 			i = 0;
 		}
-		send_buff[i] = fgetc(file);
+		in_buff[i] = fgetc(file);
 	}
+	send_buff = htons(in_buff);
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 
 void sendbinary(FILE* file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
+	char* in_buff = malloc(send_buff_size*sizeof(char));
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
 	int i = 0;
@@ -82,11 +88,13 @@ void sendbinary(FILE* file, int sock){
 
 	while(!EOF){
 		if(i >= MAXDATASIZE){
+			send_buff = htons(in_buff);
 			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 			i = 0;
 		}
-		send_buff[i] = fgetc(file);
+		in_buff[i] = fgetc(file);
 	}
+	send_buff = htons(in_buff);
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 

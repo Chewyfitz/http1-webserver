@@ -66,7 +66,10 @@ void sendchar(FILE* file, int sock){
 	while(!EOF){
 		if(i >= send_buff_size){
 			send_buff_size *= 2;
-			realloc(send_buff, send_buff_size);
+			send_buff = realloc(send_buff, send_buff_size);
+			if(send_buff == NULL){
+				exit(1);
+			}
 		}
 		send_buff[i] = fgetc(file);
 	}

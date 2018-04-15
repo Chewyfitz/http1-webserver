@@ -95,7 +95,7 @@ void sendchar(FILE* file, int sock){
 	printf("Sending %s", concat_message);
 
 
-	send(sock, concat_message, (size_t)strlen(concat_message)+1, 0);
+	send(sock, concat_message, (size_t)strlen(concat_message), 0);
 
 	free(send_buff);
 }

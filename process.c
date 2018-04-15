@@ -61,6 +61,7 @@ void sendNotFound(int sock){
 
 	char send_buff[] = "HTTP/1.0 404 Not Found\r\n";
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+	send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 
 }
 
@@ -96,6 +97,7 @@ void sendchar(FILE* file, int sock){
 
 
 	send(sock, concat_message, (size_t)strlen(concat_message), 0);
+	send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 
 	free(send_buff);
 }

@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
 
 	char* port = argv[1];
 	if(strcmp(argv[2], ".") == 0){
-		pre_path = ""; //remove pre_path if root is current directory
+		pre_path[0] = '\0'; //remove pre_path if root is current directory
 	} else {
 		strcpy(pre_path, argv[2]); //copy the path_to_root into the pre_path global variable.
 	}

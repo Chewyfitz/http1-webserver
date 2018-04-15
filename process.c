@@ -32,9 +32,16 @@ void getExt(char* extension, char* filename){
 	// in char* extension. (or '/' if the root was requested).
 	////printf("1: %s\n", filename);
 	int len = 0;
-	len = strlen(filename) -1;
+	len = strlen(filename);
+
+	if(len == 0){
+		extension[0] = '/';
+		extension[1] = '\0';
+		return;
+	}
+
 	int i = 0;
-	while((filename[len - (i)] != '.') && len - i > 0){
+	while((filename[len - (i) -1] != '.') && len - i > 0){
 		////printf("2: %c\n", filename[len - (i)]);
 		i++;
 	}

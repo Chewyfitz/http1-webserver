@@ -112,9 +112,12 @@ void processRequest(char *request, int socket, char* pre_path){
 
 	//add the path of the requested file on to the webroot directory
 	strcat(path, req[1]);
+	if(path[0] == '/'){
+		strcpy(path, path + 1);
+	}
 
-	getExt(ext, path); 	// custom function to get a pointer to just the
-							// extension (so I know how to open the file)
+	getExt(ext, path); 	// custom function to get a str pointer to just the
+						// extension (so I know how to open the file)
 
 	// Do a fast comparison here, since it's the first one
 	if(ext[0] == '/'){

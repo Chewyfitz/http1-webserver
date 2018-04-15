@@ -79,7 +79,11 @@ int main(int argc, char *argv[]){
 	}
 
 	char* port = argv[1];
-	strcpy(pre_path, argv[2]); //copy the path_to_root into the pre_path global variable.
+	if(strcmp(argv[2], ".") == 0){
+		pre_path = ""; //remove pre_path if root is current directory
+	} else {
+		strcpy(pre_path, argv[2]); //copy the path_to_root into the pre_path global variable.
+	}
 
 	// loads up the nitty gritty of *servinfo
 	if((rv = getaddrinfo(NULL, port, &hints, &servinfo)) != 0){

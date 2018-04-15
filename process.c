@@ -88,12 +88,15 @@ void processRequest(char *request, int socket, char* pre_path){
 		// Open root/index.html
 		strcat(path, "index.html");
 		file = fopen(path, "r");
+		printf("%s\n", path);
 	} else if(strcmp(ext, ".jpg") == 0){
 		// Open the file as binary. (.jpg)
 		file = fopen(path, "rb");
+		printf("%s\n", path);
 	} else {
 		// Open the file as text. (.html .css .js)
 		file = fopen(path, "r");
+		printf("%s\n", path);
 	}
 
 	if(file == NULL){

@@ -115,7 +115,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	if(path[0] == '/'){
 		char* temppath = malloc(strlen(path)*sizeof(char));
 		strcpy(temppath, path+1);
-		strcpy(path+1, temppath);
+		strcpy(path, temppath);
 		free(temppath);
 	}
 

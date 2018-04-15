@@ -87,7 +87,8 @@ void sendchar(FILE* file, int sock){
 		printf("%c", just_read);
 	}
 	send_buff[i] = '\0';
-	char* concat_message = calloc(0, (strlen(http_message) + strlen(send_buff) + 1) * sizeof(char));
+	char* concat_message = malloc((strlen(http_message) + send_buff_size + 1) * sizeof(char));
+	concat_message[0] = '\0';
 	strcat(concat_message, http_message);
 	strcat(concat_message, send_buff);
 	printf("\n");

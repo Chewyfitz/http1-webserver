@@ -45,14 +45,14 @@ void getExt(char* extension, char* filename){
 	////printf("4: %s\n", extension);
 }
 
-void sendNotFound(int socket){
+void sendNotFound(int sock){
 
-	char send_buff = "HTTP/1.0 404 Not Found\r\n";
+	char send_buff[] = "HTTP/1.0 404 Not Found\r\n";
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 
 }
 
-sendchar(FILE file, int socket){
+sendchar(FILE file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
@@ -71,7 +71,7 @@ sendchar(FILE file, int socket){
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 
-sendchar(FILE file, int socket){
+sendchar(FILE file, int sock){
 	//initialise this to a size (potential to make this larger later)
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));

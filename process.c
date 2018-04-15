@@ -45,6 +45,51 @@ void getExt(char* extension, char* filename){
 	////printf("4: %s\n", extension);
 }
 
+void sendNotFound(int socket){
+
+	char send_buff = "HTTP/1.0 404 Not Found\r\n";
+	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+
+}
+
+sendchar(FILE file, int socket){
+	//initialise this to a size (potential to make this larger later)
+	int send_buff_size = MAXDATASIZE;
+	char* send_buff = malloc(send_buff_size*sizeof(char));
+
+	i = 0;
+	send_buff = "HTTP/1.0 200 OK\r\n";
+	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+
+	while(!EOF){
+		if(i >= MAXDATASIZE){
+			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+			i = 0;
+		}
+		send_buff[i] = fgetc(file);
+	}
+	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+}
+
+sendchar(FILE file, int socket){
+	//initialise this to a size (potential to make this larger later)
+	int send_buff_size = MAXDATASIZE;
+	char* send_buff = malloc(send_buff_size*sizeof(char));
+
+	i = 0;
+	send_buff = "HTTP/1.0 200 OK\r\n";
+	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+
+	while(!EOF){
+		if(i >= MAXDATASIZE){
+			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+			i = 0;
+		}
+		send_buff[i] = fgetc(file);
+	}
+	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+}
+
 //process and respond to a caught request.
 void processRequest(char *request, int socket, char* pre_path){
 	int request_size = strlen(request);
@@ -56,13 +101,9 @@ void processRequest(char *request, int socket, char* pre_path){
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
 	char separators[] = " \n";
-	char path[100];
+	char path[MAXDATASIZE];
 	char ext[6];
 	strcpy(path, pre_path);
-
-	//initialise this to a size
-	int send_buff_size = 200;
-	char* send_buff = malloc(send_buff_size*sizeof(char));
 
 	FILE *file = NULL;
 
@@ -89,19 +130,34 @@ void processRequest(char *request, int socket, char* pre_path){
 		strcat(path, "index.html");
 		file = fopen(path, "r");
 		printf("%s\n", path);
+
+		if(file == NULL){
+			sendNotFound(sock);
+			return;
+		}
+
+		sendchar(file, sock)
 	} else if(strcmp(ext, ".jpg") == 0){
 		// Open the file as binary. (.jpg)
 		file = fopen(path, "rb");
 		printf("%s\n", path);
+
+		if(file == NULL){
+			sendNotFound(sock);
+			return;
+		}
+
+		sendbinary(file, sock)
 	} else {
 		// Open the file as text. (.html .css .js)
 		file = fopen(path, "r");
 		printf("%s\n", path);
-	}
 
-	if(file == NULL){
-		send_buff = "HTTP/1.0 404 Not Found\r\n";
-		send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
-	}
+		if(file == NULL){
+			sendNotFound(sock);
+			return;
+		}
 
+		sendchar(file, sock)
+	}
 }

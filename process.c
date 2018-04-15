@@ -29,7 +29,10 @@ void getExt(char* extension, char* filename){
 	printf("1: %s\n", filename);
 	int len= strlen(filename) -1;
 	int i = 0;
-	while((filename[len - (i++)] != '.') && len - i > 0) printf("2: %c\n", filename[len - (i)]);
+	while((filename[len - (i)] != '.') && len - i > 0){
+		printf("2: %c\n", filename[len - (i)]);
+		i++;
+	}
 
 	// +1 for offset
 	strcpy(extension, filename + (len - i + 2));

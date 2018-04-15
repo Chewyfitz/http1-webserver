@@ -31,7 +31,7 @@ void getExt(char* extension, char* filename){
 	int i = 0;
 	while((filename[len - (i++)] != '.') && len - i > 0) printf("2: %c\n", filename[len - (i)]);
 
-	strcpy(extension, filename + i);
+	strcpy(extension, filename + (len - i));
 	printf("3: %s\n", extension);
 }
 

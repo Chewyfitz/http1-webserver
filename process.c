@@ -79,7 +79,7 @@ void sendchar(FILE* file, int sock){
 		printf("%c", just_read);
 	}
 	send_buff[i] = '\0';
-	char* concat_message = malloc((strlen(http_message) + strlen(send_buff)) * sizeof(char));
+	char* concat_message = malloc((strlen(http_message) + strlen(send_buff) + 1) * sizeof(char));
 	strcat(concat_message, http_message);
 	strcat(concat_message, send_buff);
 	printf("\n");
@@ -98,7 +98,7 @@ void sendbinary(FILE* file, int sock){
 //process and respond to a caught request.
 void processRequest(char *request, int socket, char* pre_path){
 	int request_size = strlen(request);
-	char* s = malloc(request_size * sizeof(char));
+	char* s = malloc((request_size + 1) * sizeof(char));
 	strcpy(s, request); // copy it to local so nothing can mess with it.
 	int sock = socket;
 

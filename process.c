@@ -75,7 +75,7 @@ void sendchar(FILE* file, int sock){
 			}
 		}
 		just_read = (send_buff[i++] = fgetc(file));
-		printf(".%c", send_buff[i]);
+		printf("%c", just_read);
 	}
 	printf("\n");
 	printf("Sending %s", send_buff);

@@ -61,7 +61,7 @@ void sendchar(FILE* file, int sock){
 
 	int i = 0;
 	send_buff = "HTTP/1.0 200 OK\r\n";
-	int i = strlen(send_buff);
+	i = strlen(send_buff);
 	while(!EOF){
 		if(i >= send_buff_size){
 			send_buff_size *= 2;

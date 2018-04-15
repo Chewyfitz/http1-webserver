@@ -73,7 +73,7 @@ void sendchar(FILE* file, int sock){
 		}
 		send_buff[i] = fgetc(file);
 	}
-
+	printf("Sending %s", send_buff);
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 

@@ -25,10 +25,10 @@
 
 void getExt(char* extension, char* filename){
 	int i = strlen(filename);
-	while(*(filename + i--) != ".");
-	strcpy(extension, filename + i);
+	while(*(&(filename + i--)) != ".");
 
-	printf(extension);
+	strcpy(extension, filename + i);
+	printf("%s\n", extension);
 }
 
 void processRequest(char *request, int socket, char* pre_path){
@@ -38,8 +38,8 @@ void processRequest(char *request, int socket, char* pre_path){
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
 	char separators[] = " \n";
-	char[100] path;
-	char[5] ext;
+	char path[100];
+	char ext[5];
 	strcpy(path, pre_path);
 
 	int i = 0;
@@ -56,7 +56,7 @@ void processRequest(char *request, int socket, char* pre_path){
 	//add the path of the requested file on to the webroot directory
 	strcat(path, req[1]);
 
-	getExt(ext, req[1]) 	// custom function to get a pointer to just the
+	getExt(ext, req[1]); 	// custom function to get a pointer to just the
 							// extension (so I know how to open the file)
 
 	if(strcmp(ext, ".jpg") == 0){

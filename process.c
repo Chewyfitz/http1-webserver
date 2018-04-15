@@ -45,10 +45,14 @@ void getExt(char* extension, char* filename){
 	////printf("4: %s\n", extension);
 }
 
+//process and respond to a caught request.
 void processRequest(char *request, int socket, char* pre_path){
 	int request_size = strlen(request);
 	char* s = malloc(request_size * sizeof(char));
 	strcpy(s, request); // copy it to local so nothing can mess with it.
+	int sock = socket;
+
+
 	char** req = malloc(MAXDATASIZE*sizeof(char*));
 	char* token;
 	char separators[] = " \n";
@@ -94,7 +98,7 @@ void processRequest(char *request, int socket, char* pre_path){
 
 	if(file == NULL){
 		send_buff = "HTTP/1.0 404 Not Found\r\n";
-		sendto(socket, send_buff, (size_t)strlen(send_buff), 0);
+		send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 	}
 
 }

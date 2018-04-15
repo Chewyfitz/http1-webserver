@@ -75,25 +75,7 @@ void sendchar(FILE* file, int sock){
 }
 
 void sendbinary(FILE* file, int sock){
-	//initialise this to a size (potential to make this larger later)
-	int send_buff_size = MAXDATASIZE;
-	char* in_buff = malloc(send_buff_size*sizeof(char));
-	char* send_buff = malloc(send_buff_size*sizeof(char));
-
-	int i = 0;
-	send_buff = "HTTP/1.0 200 OK\r\n";
-	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
-
-	while(!EOF){
-		if(i >= MAXDATASIZE){
-			send_buff = htons(in_buff);
-			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
-			i = 0;
-		}
-		in_buff[i] = fgetc(file);
-	}
-	send_buff = htons(in_buff);
-	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
+	// TODO: Make this
 }
 
 //process and respond to a caught request.

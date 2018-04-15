@@ -62,7 +62,8 @@ void sendchar(FILE* file, int sock){
 	int i = 0;
 	send_buff = "HTTP/1.0 200 OK\r\n";
 	i = strlen(send_buff);
-	while(!EOF){
+	char just_read = '1';
+	while(just_read != EOF){
 		if(i >= send_buff_size){
 			send_buff_size *= 2;
 			send_buff = realloc(send_buff, send_buff_size);
@@ -70,8 +71,8 @@ void sendchar(FILE* file, int sock){
 				exit(1);
 			}
 		}
-		send_buff[i++] = fgetc(file);
-		printf("%c", send_buff[i]);
+		just_read = (send_buff[i++] = fgetc(file));
+		printf(".%c", send_buff[i]);
 	}
 	printf("\n");
 	printf("Sending %s", send_buff);

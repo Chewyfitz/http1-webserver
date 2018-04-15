@@ -55,9 +55,8 @@ void sendNotFound(int sock){
 }
 
 void sendchar(FILE* file, int sock){
-	//initialise this to a size (potential to make this larger later)
+	//initialise this to a size
 	int send_buff_size = MAXDATASIZE;
-	char* in_buff = malloc(send_buff_size*sizeof(char));
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
 	int i = 0;
@@ -65,14 +64,13 @@ void sendchar(FILE* file, int sock){
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 
 	while(!EOF){
-		if(i >= MAXDATASIZE){
-			send_buff = htons(in_buff);
-			send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
-			i = 0;
+		if(i >= send_buff_size){
+			send_buff_size *= 2;
+			realloc(send_buff, send_buff_size);
 		}
-		in_buff[i] = fgetc(file);
+		send_buff[i] = fgetc(file);
 	}
-	send_buff = htons(in_buff);
+
 	send(sock, send_buff, (size_t)strlen(send_buff)+1, 0);
 }
 

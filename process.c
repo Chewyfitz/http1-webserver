@@ -115,11 +115,11 @@ void processRequest(char *request, int socket, char* pre_path){
 	if(path[0] == '/'){
 		char* temppath = malloc(strlen(path)*sizeof(char));
 		strcpy(temppath, path+1);
-		strcpy(path+1, temppath);
+		strcpy(path, temppath);
 		free(temppath);
 	}
 
-	getExt(ext, path); 	// custom function to get a str pointer to just the
+	getExt(ext, path); 	// function to get a str pointer to just the
 						// extension (so I know how to open the file)
 
 	// Do a fast comparison here, since it's the first one

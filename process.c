@@ -165,7 +165,7 @@ void sendbinary(FILE* file, int sock){
 		printf("%c", just_read);
 	}
 	*/
-	send_buff[i/2] = '\0';
+	send_buff[i++] = '\0';
 
 	printf("\n");
 	printf("Sending image...\n");

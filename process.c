@@ -139,7 +139,8 @@ void sendbinary(FILE* file, int sock){
 	rewind(file);
 
 	int send_buff_size = size;
-	int send_buff = malloc(send_buff_size*sizeof(int));
+	int *send_buff;
+	send_buff = malloc(send_buff_size*sizeof(int));
 
 	// Read from the file (two bytes at a time)
 	int i = 0;

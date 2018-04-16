@@ -76,11 +76,11 @@ void sendchar(FILE* file, int sock, char* ext){
 
 	char* http_message;
 	char* content_type;
-	if (strcmp(ext, "css")){
+	if (strcmp(ext, "css") == 0){
 		//char http_message[] = "HTTP/1.0 200 OK\nContent-Type: text/css\r\n\r\n";
 		content_type =  malloc(sizeof("text/css"));
 		strcpy(content_type, "text/css");
-	} else if (strcmp(ext, "js")){
+	} else if (strcmp(ext, "js") == 0){
 		//char http_message[] = "HTTP/1.0 200 OK\nContent-Type: text/javascript\r\n\r\n";
 		content_type =  malloc(sizeof("text/javascript"));
 		strcpy(content_type, "text/javascript");

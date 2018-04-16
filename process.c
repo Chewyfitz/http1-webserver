@@ -127,7 +127,54 @@ void sendchar(FILE* file, int sock, char* ext){
 }
 
 void sendbinary(FILE* file, int sock){
-	// TODO: Make this
+	assert(file != NULL);
+	// hard-coding this for ease and control, but this could easily be 
+	// made more versatile. (like above)
+
+	char http_message[] = "HTTP/1.0 200 OK\nContent-Type: image/jpeg\r\n\r\n";
+
+	// Find out the size of the file
+	fseek(file, 0L, SEEK_END);
+	int size = ftell(file);
+	rewind(file);
+	/*
+	int send_buff_size = MAXDATASIZE;
+	int send_buff = malloc(send_buff_size*sizeof(int));
+
+	// Read from the file (two bytes at a time)
+	int i = 0;
+	int just_read;
+	for(i = 0; i < size; i+=2){
+		fread(&just_read, 2, 1, file);
+	}
+
+
+	while((just_read = fgetc(file)) != EOF){
+		if(i >= send_buff_size){
+			send_buff_size *= 2;
+			send_buff = realloc(send_buff, send_buff_size);
+			if(send_buff == NULL){
+				exit(1);
+			}
+		}
+		send_buff[i++] = just_read;
+		printf("%c", just_read);
+	}
+	send_buff[i] = '\0';
+	char* concat_message = malloc((strlen(http_message) + send_buff_size + 1) * sizeof(char));
+	concat_message[0] = '\0';
+	strcat(concat_message, http_message);
+	strcat(concat_message, send_buff);
+	printf("\n");
+	printf("Sending %s", concat_message);
+
+
+	send(sock, concat_message, (size_t)strlen(concat_message), 0);
+
+	//send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
+
+	free(send_buff);
+	*/
 }
 
 //process and respond to a caught request.

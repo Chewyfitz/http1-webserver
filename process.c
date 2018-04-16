@@ -170,8 +170,13 @@ void sendbinary(FILE* file, int sock){
 	printf("\n");
 	printf("Sending image...\n");
 
+	// The header should be small enough that it doesn't need to be resent.
 	send(sock, http_message, sizeof(http_message)-1, 0);
+	int sent = 0;
 	send(sock, send_buff, sizeof(send_buff), 0);
+	while(sent < sizeof(send_buff)){
+		sent += send(sock, send_buff + (sent/2), sizeof(send_buff));
+	}
 
 	//send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 	free(send_buff);

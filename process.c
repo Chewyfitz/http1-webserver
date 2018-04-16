@@ -183,7 +183,7 @@ void processRequest(char *request, int socket, char* pre_path){
 		}
 
 		sendchar(file, sock, "html");
-	} else if(strcmp(ext, ".jpg") == 0){
+	} else if(strcmp(ext, "jpg") == 0){
 		// Open the file as binary. (.jpg)
 		printf("got jpg\n");
 		file = fopen(path, "rb");
@@ -194,7 +194,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendbinary(file, sock);
+		//sendbinary(file, sock);
 	} else {
 		// Open the file as text. (.html .css .js)
 		file = fopen(path, "r");

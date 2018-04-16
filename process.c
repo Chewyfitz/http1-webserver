@@ -185,6 +185,7 @@ void processRequest(char *request, int socket, char* pre_path){
 		sendchar(file, sock, "html");
 	} else if(strcmp(ext, ".jpg") == 0){
 		// Open the file as binary. (.jpg)
+		printf("got jpg\n");
 		file = fopen(path, "rb");
 		printf("%s\n", path);
 

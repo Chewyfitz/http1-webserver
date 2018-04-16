@@ -174,8 +174,8 @@ void sendbinary(FILE* file, int sock){
 	send(sock, http_message, sizeof(http_message)-1, 0);
 	int sent = 0;
 	// send(sock, send_buff, sizeof(send_buff), 0);
-	while(sent < sizeof(send_buff)){
-		sent += send(sock, send_buff + (sent/2), sizeof(send_buff), 0);
+	while(sent < size){
+		sent += send(sock, send_buff + (sent/2), size, 0);
 	}
 
 	//send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);

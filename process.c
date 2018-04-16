@@ -139,12 +139,14 @@ void sendbinary(FILE* file, int sock){
 	rewind(file);
 
 	int send_buff_size = size;
-	long *send_buff;
+	long *send_buff = NULL;
 	send_buff = malloc(send_buff_size*sizeof(long));
+
+	assert(send_buff != NULL);
 
 	// Read from the file (two bytes at a time)
 	int i = 0, j = 0;
-	int just_read;
+	long just_read;
 	for(; j < size; i++, j += sizeof(long)){
 		fread(&just_read, sizeof(long), 1, file);
 		send_buff[i] = htonl(just_read);

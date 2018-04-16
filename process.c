@@ -149,7 +149,7 @@ void sendbinary(FILE* file, int sock){
 	long just_read;
 	for(; j < size; i++, j += sizeof(uint32_t)){
 		fread(&just_read, sizeof(uint32_t), 1, file);
-		send_buff[i] = htonl(just_read);
+		send_buff[i] = just_read;
 	}
 
 	/*

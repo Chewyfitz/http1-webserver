@@ -137,9 +137,8 @@ void sendbinary(FILE* file, int sock){
 	fseek(file, 0L, SEEK_END);
 	int size = ftell(file);
 	rewind(file);
-	printf("%d", size);
-	/*
-	int send_buff_size = MAXDATASIZE;
+
+	int send_buff_size = size;
 	int send_buff = malloc(send_buff_size*sizeof(int));
 
 	// Read from the file (two bytes at a time)
@@ -147,9 +146,10 @@ void sendbinary(FILE* file, int sock){
 	int just_read;
 	for(i = 0; i < size; i+=2){
 		fread(&just_read, 2, 1, file);
+		send_buff[i/2] = just_read;
 	}
 
-
+	/*
 	while((just_read = fgetc(file)) != EOF){
 		if(i >= send_buff_size){
 			send_buff_size *= 2;
@@ -161,21 +161,17 @@ void sendbinary(FILE* file, int sock){
 		send_buff[i++] = just_read;
 		printf("%c", just_read);
 	}
-	send_buff[i] = '\0';
-	char* concat_message = malloc((strlen(http_message) + send_buff_size + 1) * sizeof(char));
-	concat_message[0] = '\0';
-	strcat(concat_message, http_message);
-	strcat(concat_message, send_buff);
+	*/
+	send_buff[i/2] = '\0';
+
 	printf("\n");
-	printf("Sending %s", concat_message);
+	printf("Sending image...\n");
 
-
-	send(sock, concat_message, (size_t)strlen(concat_message), 0);
+	send(sock, http_message, sizeof(http_message)-1, 0);
+	send(sock, send_buff, sizeof(send_buff), 0);
 
 	//send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
-
 	free(send_buff);
-	*/
 }
 
 //process and respond to a caught request.

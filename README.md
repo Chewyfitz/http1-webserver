@@ -4,11 +4,11 @@ Implemented:
 
 + Makefile
 + Socket Connections
++ Header Reading
 
 --------------
 Not Yet Implemented:
 
-- Header Reading
 - File IO
 - html MIME type
 - jpege MIME type

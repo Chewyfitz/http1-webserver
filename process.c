@@ -74,6 +74,8 @@ void sendchar(FILE* file, int sock, char* ext){
 	// hard-coding this for ease and control, but this could easily be 
 	// made automatic by pulling ext and modifying the final 4 chars
 
+	//ideally this functionality could be abstracted out into a separate function
+
 	char* http_message;
 	char* content_type;
 	if (strcmp(ext, "css") == 0){
@@ -119,7 +121,7 @@ void sendchar(FILE* file, int sock, char* ext){
 
 	send(sock, concat_message, (size_t)strlen(concat_message), 0);
 
-	send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
+	//send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 
 	free(send_buff);
 }

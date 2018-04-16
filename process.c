@@ -65,14 +65,35 @@ void sendNotFound(int sock){
 
 }
 
-void sendchar(FILE* file, int sock){
+void sendchar(FILE* file, int sock, char* ext){
 	assert(file != NULL);
 	//initialise this to a size
 	int send_buff_size = MAXDATASIZE;
 	char* send_buff = malloc(send_buff_size*sizeof(char));
 
+	// hard-coding this for ease and control, but this could easily be 
+	// made automatic by pulling ext and modifying the final 4 chars
 
-	char http_message[] = "HTTP/1.0 200 OK\r\n\r\n";
+	char* http_message;
+	char* content_type;
+	if (strcmp(ext, "css")){
+		//char http_message[] = "HTTP/1.0 200 OK\nContent-Type: text/css\r\n\r\n";
+		content_type =  malloc(sizeof("text/css"));
+		strcpy(content_type, "text/css");
+	} else if (strcmp(ext, "js")){
+		//char http_message[] = "HTTP/1.0 200 OK\nContent-Type: text/javascript\r\n\r\n";
+		content_type =  malloc(sizeof("text/javascript"));
+		strcpy(content_type, "text/javascript");
+	} else {
+		//char http_message[] = "HTTP/1.0 200 OK\nContent-Type: text/html\r\n\r\n";
+		content_type = malloc(sizeof("text/html"));
+		strcpy(content_type, "text/html");
+	}
+
+	http_message = (char*)malloc((sizeof("HTTP/1.0 200 OK\nContent-Type: \r\n\r\n") 
+									+ strlen(content_type))*sizeof(char));
+	sprintf(http_message, "HTTP/1.0 200 OK\nContent-Type: %s\r\n\r\n", content_type);
+
 
 	int i = 0;
 	int just_read;
@@ -96,7 +117,8 @@ void sendchar(FILE* file, int sock){
 	printf("Sending %s", concat_message);
 
 
-	send(sock, concat_message, (size_t)strlen(concat_message), 0);
+	send(sock, concat_message, (size_t)len, 0);
+
 	send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 
 	free(send_buff);
@@ -147,6 +169,7 @@ void processRequest(char *request, int socket, char* pre_path){
 						// extension (so I know how to open the file)
 
 	// Do a fast comparison here, since it's the first one
+	printf("%s", ext);
 	if(ext[0] == '/'){
 		// Open root/index.html
 		strcat(path, "index.html");
@@ -158,7 +181,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendchar(file, sock);
+		sendchar(file, sock, "html");
 	} else if(strcmp(ext, ".jpg") == 0){
 		// Open the file as binary. (.jpg)
 		file = fopen(path, "rb");
@@ -180,7 +203,7 @@ void processRequest(char *request, int socket, char* pre_path){
 			return;
 		}
 
-		sendchar(file, sock);
+		sendchar(file, sock, ext);
 	}
 	free(s);
 	free(req);

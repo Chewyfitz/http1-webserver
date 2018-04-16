@@ -137,6 +137,7 @@ void sendbinary(FILE* file, int sock){
 	fseek(file, 0L, SEEK_END);
 	int size = ftell(file);
 	rewind(file);
+	printf("%d", size);
 	/*
 	int send_buff_size = MAXDATASIZE;
 	int send_buff = malloc(send_buff_size*sizeof(int));

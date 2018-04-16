@@ -117,7 +117,7 @@ void sendchar(FILE* file, int sock, char* ext){
 	printf("Sending %s", concat_message);
 
 
-	send(sock, concat_message, (size_t)len, 0);
+	send(sock, concat_message, (size_t)strlen(concat_message), 0);
 
 	send(sock, "\r\n\r\n", sizeof("\r\n\r\n")-1, 0);
 

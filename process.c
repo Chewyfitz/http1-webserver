@@ -169,7 +169,6 @@ void processRequest(char *request, int socket, char* pre_path){
 						// extension (so I know how to open the file)
 
 	// Do a fast comparison here, since it's the first one
-	printf("%s", ext);
 	if(ext[0] == '/'){
 		// Open root/index.html
 		strcat(path, "index.html");
@@ -183,6 +182,7 @@ void processRequest(char *request, int socket, char* pre_path){
 
 		sendchar(file, sock, "html");
 	} else if(strcmp(ext, ".jpg") == 0){
+		printf("%s", ext);
 		// Open the file as binary. (.jpg)
 		file = fopen(path, "rb");
 		printf("%s\n", path);
@@ -194,6 +194,7 @@ void processRequest(char *request, int socket, char* pre_path){
 
 		sendbinary(file, sock);
 	} else {
+		printf("%s", ext);
 		// Open the file as text. (.html .css .js)
 		file = fopen(path, "r");
 		printf("%s\n", path);

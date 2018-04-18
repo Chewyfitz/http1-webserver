@@ -1,22 +1,15 @@
-Hopefully everything should work!
+# COMP30023 Assignment 1 Test Script
+This repository contains a simple test script for COMP30023 assignment 1. The script is a bash sheel script that will test the basic operation of your server to check correct return of content, headers and MIME type. 
 
-Implemented:
+## Files
+* **test_script.sh** shell script that runs wget, grep, and diff to check HTTP responses to test HTTP GET request. 
+* **/test/** folder containing test files that will be served by your server.
 
-+ Makefile
-+ Socket Connections
-+ Header Reading
+## Running
+Make sure that the **test_script.sh** is executable then run:
 
---------------
-Not Yet Implemented:
+./test_script.sh *name_of_your_server* *port_number* 
 
-- File IO
-- html MIME type
-- jpege MIME type
-- CSS MIME type
-- JavaScript MIME type
-- 200 OK reponse
-- 404 NOT FOUND response
-- Sending Files
-- File Sending allowed from folders
+For example, if your server is compiled to *myserver*, run:
 
-- Multithreading
+./test_script.sh myserver 8080 

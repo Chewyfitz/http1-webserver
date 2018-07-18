@@ -14,9 +14,8 @@ Implemented:
 + 404 NOT FOUND response
 + Sending Files
 + File Sending allowed from folders
++ Multithreading
 
 --------------
 Not Yet Implemented:
-
-- Multithreading
 
